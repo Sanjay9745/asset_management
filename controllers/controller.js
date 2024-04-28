@@ -362,37 +362,38 @@ const getReturnAsset = async (req, res) => {
     if(employees.length==0){
         return res.redirect("/all-employees");
     }
-    res.render("return-asset", { employees });
+    res.render("return-asset", { employees, id});
   } catch (error) {
     res.redirect("/all-employees");
   }
 };
 const returnAsset = async (req, res) => {
+  try {
     const { id } = req.query;
-    try {
-        const { return_date, reason, employee_id, asset_id } = req.body;
-        console.log(return_date, reason, employee_id, asset_id)
-        if (!return_date || !reason) {
-        return res.redirect("/all-employees");
-        }
-        //update employeeWithAsset
-       const isEmployeeAsset =  await db.employeeWithAssets.update(
-        { return_date, reason },
-        { where: { employee_id: id, asset_id:asset_id } }
-        );
-        if (!isEmployeeAsset) {
-        return res.redirect("/all-employees");
-        }
+      const { return_date, reason, asset_id ,employee_id} = req.body;
+      console.log(id)
+      if (!return_date || !reason) {
+          return res.redirect("/all-employees");
+      }
+      //update employeeWithAsset
+      const isEmployeeAsset =  await db.employeeWithAssets.update(
+          { return_date, reason },
+          { where: { employee_id: id, asset_id:asset_id } }
+      );
+      if (!isEmployeeAsset) {
+          return res.redirect("/all-employees");
+      }
 
-        //update asset status
-        await db.assets.update({ status: "available" }, { where: { _id: asset_id } });
-        console.log("asset updated")
-        res.redirect("/all-employees");
-    } catch (error) {
-        console.log(error);
-        res.redirect("/all-employees");
-    }
+      //update asset status
+      await db.assets.update({ status: "available" }, { where: { _id: asset_id } });
+      console.log("asset updated")
+      res.redirect("/all-employees");
+  } catch (error) {
+      console.log(error);
+      res.redirect("/all-employees");
+  }
 }
+
 const deleteEmployee = (req, res) => {
   const { id } = req.query;
   try {
