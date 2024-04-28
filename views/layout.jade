@@ -1,0 +1,130 @@
+doctype html
+html(lang='en')
+  head
+    // Required Meta Tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // Document Title, Description, and Author
+    title Console - Free Bootstrap Admin Template
+    meta(name='description', content='Console is a Free Bootstrap Admin Template.')
+    meta(name='author', content='BootstrapBrain')
+    // Favicon and Touch Icons
+    link(rel='icon', type='image/png', sizes='512x512', href='./assets/favicon/favicon-512x512.png')
+    // Google Fonts Files
+    link(rel='preconnect', href='https://fonts.googleapis.com')
+    link(rel='preconnect', href='https://fonts.gstatic.com', crossorigin='')
+    link(href='https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap', rel='stylesheet')
+    // CSS Files
+    link(rel='stylesheet', href='./assets/css/console-bsb.css')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.css')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css')
+    link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js')
+    link(rel="stylesheet", href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css")
+    script(src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js")
+    // BSB Head
+  body
+    // Header
+    header#header.bg-white.border-bottom.border-light-subtle.sticky-top.bsb-tpl-header-sticky
+      nav.navbar.navbar-expand-md.bsb-navbar-3.bsb-tpl-navbar-sticky(data-bsb-sticky-target='#header')
+        .container
+          ul.navbar-nav
+            li.nav-item.me-3
+              a.nav-link(href='#!', data-bs-toggle='offcanvas', data-bs-target='#bsbSidebar1', aria-controls='bsbSidebar1')
+                i.bi-filter-left.fs-3.lh-1
+          a.navbar-brand(href='/')
+            img.bsb-tpl-logo(src='./assets/img/branding/logo.jpg', alt='BootstrapBrain Logo')
+          button.navbar-toggler.border-0(type='button', data-bs-toggle='collapse', data-bs-target='#bsbNavbar', aria-controls='bsbNavbar', aria-label='Toggle Navigation')
+            i.bi.bi-three-dots
+          #bsbNavbar.collapse.navbar-collapse
+            ul.navbar-nav.bsb-dropdown-menu-responsive.ms-auto.align-items-center
+              li.nav-item.dropdown
+                a.nav-link.dropdown-toggle.bsb-dropdown-toggle-caret-disable(href='/home', role='button', data-bs-toggle='dropdown', aria-expanded='false')
+                  img.img-fluid.rounded-circle(src='./assets/img/profile/profile-img-1.jpg', width='35', height='35', alt='Ethan Leo')
+                ul.dropdown-menu.dropdown-menu-md-end.bsb-dropdown-animation.bsb-fadeIn
+                  li
+                    h6.dropdown-header.fs-7.text-center Welcome, Admin
+                  li
+                    hr.dropdown-divider
+                 
+                  li
+                    a.dropdown-item.text-center(href='auth-logout.html')
+                      span
+                        span.fs-7 Log Out
+    // BSB Body Start
+    // Main
+    block content
+    // Aside
+    aside#bsbSidebar1.bsb-sidebar-1.offcanvas.offcanvas-start(tabindex='-1', aria-labelledby='bsbSidebarLabel1')
+      .offcanvas-header
+        a.sidebar-brand(href='/')
+          img#bsbSidebarLabel1.bsb-tpl-logo(src='./assets/img/branding/logo.jpg', alt='BootstrapBrain Logo')
+        button.btn-close(type='button', data-bs-dismiss='offcanvas', aria-label='Close')
+      .offcanvas-body.pt-0
+        hr.sidebar-divider.mb-3
+        ul.navbar-nav
+          li.nav-item
+            a.nav-link.p-3.bg-light.rounded.active(data-bs-toggle='collapse', href='#dashboardExamples', role='button', aria-expanded='true', aria-controls='dashboardExamples')
+              .nav-link-icon.text-primary
+                i.bi.bi-grid
+              span.nav-link-text.fw-bold Assets
+            #dashboardExamples.collapse.show
+              ul.nav.flex-column.ms-4
+                li.nav-item
+                  a.nav-link.link-primary.active(aria-current='page', href='/add-asset')
+                    .nav-link-icon.text-primary-emphasis
+                      i.bi.bi-arrow-right-short
+                    span.nav-link-text Add Assets
+            #dashboardExamples.collapse.show
+              ul.nav.flex-column.ms-4
+                li.nav-item
+                  a.nav-link.link-primary.active(aria-current='page', href='/all-assets')
+                    .nav-link-icon.text-primary-emphasis
+                      i.bi.bi-arrow-right-short
+                    span.nav-link-text All Assets
+            #dashboardExamples.collapse.show
+              ul.nav.flex-column.ms-4
+                li.nav-item
+                  a.nav-link.link-primary.active(aria-current='page', href='/add-asset-category')
+                    .nav-link-icon.text-primary-emphasis
+                      i.bi.bi-arrow-right-short
+                    span.nav-link-text Add Asset Category
+          li.nav-item
+            a.nav-link.p-3(data-bs-toggle='collapse', href='#componentExamples', role='button', aria-expanded='false', aria-controls='componentExamples')
+              .nav-link-icon.text-primary
+                i.bi.bi-menu-button-wide-fill
+              span.nav-link-text.fw-bold Employees
+            #componentExamples.collapse.show
+              ul.nav.flex-column.ms-4
+                li.nav-item
+                  a.nav-link.link-secondary(aria-current='page', href='/add-employee')
+                    .nav-link-icon.text-primary-emphasis
+                      i.bi.bi-arrow-right-short
+                    span.nav-link-text Add Employees
+                li.nav-item
+                  a.nav-link.link-secondary(aria-current='page', href='/all-employees')
+                    .nav-link-icon.text-primary-emphasis
+                      i.bi.bi-arrow-right-short
+                    span.nav-link-text All Employees
+        hr.sidebar-divider.my-4
+    // Javascript Files: Vendors
+    script(src='https://unpkg.com/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/apexcharts')
+    script(src='https://cdn.jsdelivr.net/npm/jsvectormap')
+    script(src='https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world-merc.js')
+    script(src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js')
+    script(src='https://cdn.jsdelivr.net/npm/@fullcalendar/bootstrap5@6.1.9/index.global.min.js')
+    // Javascript Files: Controllers
+    script(src='./assets/controller/console-bsb.js')
+    script(src='./assets/controller/chart-1.js')
+    script(src='./assets/controller/chart-3.js')
+    script(src='./assets/controller/chart-4.js')
+    script(src='./assets/controller/map-2.js')
+    script(src='./assets/controller/calendar-1.js')
+    script(src='./js/main.js')
+    script.
+      $(document).ready(function() {
+        $('.table1').DataTable();
+      });
+    // BSB Body End

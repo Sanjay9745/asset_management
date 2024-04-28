@@ -1,0 +1,55 @@
+extends layout
+
+block content
+    .container
+        .col-12.form-container.mt-5.mb-5
+            .row.gy-3.gy-md-4
+                .col-12
+                    .card.widget-card.border-light.shadow-sm
+                        .card-header.bg-transparent.p-4.border-light-subtle
+                            h5.card-title.widget-card-title.m-0 Add Asset
+                        .card-body.p-4
+                            form.row.g-3(action='/add-asset' method='POST')
+                                .col-12
+                                    label.form-label(for='serialNumber') Serial Number
+                                    input#serialNumber.form-control(name='serialNumber' type='text' placeholder='Enter Asset Serial Number' required)
+                                .col-md-6
+                                    label.form-label(for='name') Name
+                                    input#name.form-control(name='name' type='text' placeholder='Enter Asset Name' required)
+                                .col-md-6
+                                    label.form-label(for='status') Status
+                                    select#status.form-select(name='status')
+                                        option(value='' disabled selected) Select Status
+                                        each statusOption in ['available', 'in-use', 'maintenance', 'disposed']
+                                            option(value=statusOption)= statusOption
+                                .col-md-6
+                                    label.form-label(for='purchaseDate') Purchase Date
+                                    input#purchaseDate.form-control(name='purchaseDate' type='date' placeholder='Enter Asset Purchase Date')
+                                .col-md-6
+                                    label.form-label(for='warrantyEndDate') Warranty Date
+                                    input#warrantyEndDate.form-control(name='warrantyEndDate' type='date' placeholder='Enter Asset Warranty Date')
+                                .col-12
+                                    label.form-label(for='description') Description
+                                    input#description.form-control(name='description' type='text' placeholder='Enter Asset Description')
+                                .col-md-6
+                                    label.form-label(for='location') Location
+                                    input#location.form-control(name='location' type='text' placeholder='1234 Main St')
+                                .col-md-6
+                                    label.form-label(for='assetCategoryId') Category
+                                    select#assetCategoryId.form-select(name='assetCategoryId')
+                                        option(value="" disabled selected) Select Category
+                                        each category in assetCategories || []
+                                            option(value=category._id)= category.name
+                                .col-12
+                                    button.btn.btn-primary.btn-lg.w-100(type='submit') Add Asset
+                                if message
+                                    if message.type === 'success'
+                                        .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}
+                                    else if message.type === 'danger'
+                                        .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}

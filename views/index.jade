@@ -1,0 +1,139 @@
+extends layout 
+
+block content
+    mai
+        section.pb-3.pb-md-4.pb-xl-5.bg-light
+            .container
+                .row.gy-3.gy-md-4
+                    .col-12.col-sm-6.col-xl-3
+                        .card.widget-card.border-light.shadow-sm
+                            .card-body.p-4
+                                .row
+                                    .col-8
+                                        h5.card-title.widget-card-title.mb-3 Assets
+                                        h4.card-subtitle.text-body-secondary.m-0 #{totalAssets}
+                                    .col-4
+                                        .d-flex.justify-content-end
+                                            .lh-1.text-white.bg-primary.rounded-circle.p-3.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-truck.fs-4
+                                .row
+                                    .col-12
+                                        .d-flex.align-items-center.mt-3
+                                            span.lh-1.me-3.bg-danger-subtle.text-danger.rounded-circle.p-1.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-arrow-right-short.bsb-rotate-45
+                                            div
+                                                p.fs-7.mb-0 #{totalAssets}
+                                                p.fs-7.mb-0.text-secondary since last week
+                    .col-12.col-sm-6.col-xl-3
+                        .card.widget-card.border-light.shadow-sm
+                            .card-body.p-4
+                                .row
+                                    .col-8
+                                        h5.card-title.widget-card-title.mb-3 Employees
+                                        h4.card-subtitle.text-body-secondary.m-0 #{totalEmployees}
+                                    .col-4
+                                        .d-flex.justify-content-end
+                                            .lh-1.text-white.bg-primary.rounded-circle.p-3.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-currency-dollar.fs-4
+                                .row
+                                    .col-12
+                                        .d-flex.align-items-center.mt-3
+                                            span.lh-1.me-3.bg-success-subtle.text-success.rounded-circle.p-1.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-arrow-right-short.bsb-rotate-n45
+                                            div
+                                                p.fs-7.mb-0 #{totalEmployees}
+                                                p.fs-7.mb-0.text-secondary since last week
+                    .col-12.col-sm-6.col-xl-3
+                        .card.widget-card.border-light.shadow-sm
+                            .card-body.p-4
+                                .row
+                                    .col-8
+                                        h5.card-title.widget-card-title.mb-3 Weekly Assets
+                                        h4.card-subtitle.text-body-secondary.m-0 #{lastWeekAssets}
+                                    .col-4
+                                        .d-flex.justify-content-end
+                                            .lh-1.text-white.bg-primary.rounded-circle.p-3.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-person.fs-4
+                                .row
+                                    .col-12
+                                        .d-flex.align-items-center.mt-3
+                                            span.lh-1.me-3.bg-success-subtle.text-success.rounded-circle.p-1.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-arrow-right-short.bsb-rotate-n45
+                                            div
+                                                p.fs-7.mb-0  #{lastWeekAssets}
+                                                p.fs-7.mb-0.text-secondary since last week
+                    .col-12.col-sm-6.col-xl-3
+                        .card.widget-card.border-light.shadow-sm
+                            .card-body.p-4
+                                .row
+                                    .col-8
+                                        h5.card-title.widget-card-title.mb-3 Weekly Employe
+                                        h4.card-subtitle.text-body-secondary.m-0 #{lastWeekEmployees}
+                                    .col-4
+                                        .d-flex.justify-content-end
+                                            .lh-1.text-white.bg-primary.rounded-circle.p-3.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-cart.fs-4
+                                .row
+                                    .col-12
+                                        .d-flex.align-items-center.mt-3
+                                            span.lh-1.me-3.bg-danger-subtle.text-danger.rounded-circle.p-1.d-flex.align-items-center.justify-content-center
+                                                i.bi.bi-arrow-right-short.bsb-rotate-45
+                                            div
+                                                p.fs-7.mb-0 #{lastWeekEmployees}
+                                                p.fs-7.mb-0.text-secondary since last week
+        // Section - Bootstrap Brain Component
+        section.pb-3.pb-md-4.pb-xl-5.bg-light
+            .container
+                .row.gy-3.gy-md-4
+                    .col-12.col-lg-6.col-xl-5
+                        // Card 2 - Bootstrap Brain Component
+                        .card.widget-card.border-light.shadow-sm.h-100
+                            .card-body.p-4
+                                h5.card-title.widget-card-title.mb-4 Employee
+                                .row.gy-4
+                                each employee in employees || []
+                                    .col-12
+                                        .row.align-items-center
+                                            .col-8
+                                                .d-flex.align-items-center.g-5
+                                               
+                                                    div.my-3
+                                                        h6.m-0 #{employee.name}
+                                                       
+                                            .col-4
+                                                h6.text-end.m-0 #{employee.status}
+                                   
+                    .col-12.col-lg-6.col-xl-7
+                        // Table 1 - Bootstrap Brain Component
+                        .card.widget-card.border-light.shadow-sm.h-100
+                            .card-body.p-4
+                                h5.card-title.widget-card-title.mb-4    Recent Assets
+                                .table-responsive
+                                    table.table.table-borderless.bsb-table-xl.text-nowrap.align-middle.m-0
+                                        thead
+                                            tr
+                                                th Name
+                                                th Serial Number
+                                                th Date
+                                                th Status
+                                            
+                                        tbody
+                                        each asset in assets || []
+                                            tr
+                                                td
+                                                    h6.mb-1 #{asset.name}
+                                 
+                                                td
+                                                    h6.mb-1 #{asset.serialNumber}
+                                                    span.text-secondary.fs-7 #{asset.location}
+                           
+                                                td
+                                           
+                                                    span.text-secondary.fs-7 #{asset.purchaseDate}
+                                                    span.text-secondary.fs-7 #{asset.warrantyEndDate}
+                                               
+                                           
+                                                td
+                                                    span.badge.rounded-pill(class=getBadgeClass(asset.status)) #{asset.status}
+
+                                           

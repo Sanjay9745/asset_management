@@ -1,0 +1,34 @@
+extends layout 
+
+block content
+    main#main
+      .container
+        section.pb-3.pb-md-4.pb-xl-5.bg-light.mt-5
+          .container
+            .row.gy-3.gy-md-4
+              .col-12
+                .row.gy-3.gy-md-4
+                  .col-12
+                    .card.widget-card.border-light.shadow-sm
+                      .card-header.bg-transparent.p-4.border-light-subtle
+                        h5.card-title.widget-card-title.m-0 All Employees
+                      .card-body.p-4
+                        table.table.table-striped
+                          thead
+                            tr
+                              th(scope='col') #
+                              th(scope='col') Name
+                              th(scope='col') Add Asset
+                              th(scope='col') Handle
+                          tbody
+                          each employee , index in employees || []
+                            tr
+                              th(scope='row') #{index + 1}
+                              td= employee.name
+                              td
+                                a.btn.btn-sm.btn-outline-success(href=`/add-asset-to-employee?id=${employee._id}`) Add Asset
+                              td(style='display: flex; gap: 15px;')
+                            
+                                a.btn.btn-sm.btn-outline-primary(href=`/return-asset?id=${employee._id}`) Return Asset
+                                a.btn.btn-sm.btn-outline-danger(href=`/delete-employee?id=${employee._id}`) Delete
+                           

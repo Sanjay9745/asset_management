@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    .container
+        .col-12.form-container.mt-5
+            .card.widget-card.border-light.shadow-sm
+                .card-header.bg-transparent.p-4.border-light-subtle
+                    h5.card-title.widget-card-title.m-0 Add Asset Category
+                .card-body.p-4
+                    form.row.g-3(action='/add-asset-category' method='POST')
+                        .col-12
+                            label.form-label(for='name') Name
+                            input#name.form-control(type='text' name='name' placeholder='Enter Category Name' required)
+                        .col-12
+                            button.btn.btn-primary.btn-lg.w-100.mt-5(type='submit') Add Asset Category
+                        if message
+                            .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                                button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                    span(aria-hidden='true') &times;
+                                | #{message}

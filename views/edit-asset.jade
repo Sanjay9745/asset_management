@@ -1,0 +1,65 @@
+extends layout
+
+block content
+    .container
+        .col-12.form-container.mt-5.mb-5
+            .row.gy-3.gy-md-4
+                .col-12
+                    .card.widget-card.border-light.shadow-sm
+                        .card-header.bg-transparent.p-4.border-light-subtle
+                            h5.card-title.widget-card-title.m-0 Edit Asset
+                        .card-body.p-4
+                            form.row.g-3(action=`/edit-asset?id=${id}` method='POST')
+
+                                .col-12
+                                    label.form-label(for='serialNumber') Serial Number
+                                    input#serialNumber.form-control(name='serialNumber' type='text' value=(asset ? asset.serialNumber : '') placeholder='Enter Asset Serial Number' required)
+                                
+                                .col-md-6
+                                    label.form-label(for='name') Name
+                                    input#name.form-control(name='name' type='text' value=(asset ? asset.name : '') placeholder='Enter Asset Name' required)
+                                
+                                .col-md-6
+                                    label.form-label(for='status') Status
+                                    select#status.form-select(name='status')
+                                        option(value='' disabled selected) Select Status
+                                        each statusOption in ['available', 'in-use', 'maintenance', 'disposed']
+                                            option(value=statusOption selected=(asset && statusOption === asset.status))= statusOption
+
+                                .col-md-6
+                                    label.form-label(for='purchaseDate') Purchase Date
+                                    input#purchaseDate.form-control(name='purchaseDate' type='date' value=(asset ? asset.purchaseDate : ''))
+                                
+                                .col-md-6
+                                    label.form-label(for='warrantyEndDate') Warranty Date
+                                    input#warrantyEndDate.form-control(name='warrantyEndDate' type='date' value=(asset ? asset.warrantyEndDate : ''))
+
+                                .col-12
+                                    label.form-label(for='description') Description
+                                    input#description.form-control(name='description' type='text' value=(asset ? asset.description : '') placeholder='Enter Asset Description')
+                                
+                                .col-md-6
+                                    label.form-label(for='location') Location
+                                    input#location.form-control(name='location' type='text' value=(asset ? asset.location : '') placeholder='1234 Main St')
+
+                                .col-md-6
+                                    label.form-label(for='assetCategoryId') Category
+                                    select#assetCategoryId.form-select(name='assetCategoryId')
+                                        option(value="" disabled selected) Select Category
+                                        each category in assetCategories || []
+                                            option(value=category._id selected=(asset && category._id == asset.assetCategoryId))= category.name
+
+                                .col-12
+                                    button.btn.btn-primary.btn-lg.w-100(type='submit') Update Asset
+                                
+                                if message
+                                    if message.type === 'success'
+                                        .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}
+                                    else if message.type === 'danger'
+                                        .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}

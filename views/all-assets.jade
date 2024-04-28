@@ -1,0 +1,54 @@
+extends layout 
+
+block content
+    main#main
+        .container
+            section.pb-3.pb-md-4.pb-xl-5.bg-light
+                .container
+                    //filters
+                    .row.gy-3.gy-md-4
+                        .col-12
+                            .card.widget-card.border-light.shadow-sm
+                                .card-body.p-4
+                                    form.row.g-3(action='/all-assets' method='GET')
+                                        .col-md-6
+                                            label.form-label(for='search') Name
+                                            input#name.form-control(name='search' type='text' placeholder='Search' )
+                                         .col-md-6
+                                            label.form-label(for='status') Status
+                                            select#status.form-select(name='status')
+                                                option(value='' disabled selected) Select Status
+                                                each statusOption in ['available', 'in-use', 'maintenance', 'disposed']
+                                                    option(value=statusOption)= statusOption
+                                        .col-12
+                                            button.btn.btn-primary.btn-lg.w-100(type='submit') Filter
+                    .row.gy-3.gy-md-4
+                        .col-12
+                            .row.gy-3.gy-md-4
+                                .col-12
+                                    .card-body.p-4
+                                        .card.widget-card.border-light.shadow-sm
+                                            .card-body.p-4
+                                                h5.card-title.widget-card-title.mb-4 All Assets
+                                                .table-responsive
+                                                    table.table.table-borderless.bsb-table-xl.text-nowrap.align-middle.m-0
+                                                        thead
+                                                            tr
+                                                                th Serial Number
+                                                                th Name
+                                                                th Status
+                                                                th History
+                                                                th Actions
+                                                        tbody
+                                                            each asset in assets || []
+                                                                tr
+                                                                    td= asset.serialNumber
+                                                                    td= asset.name
+                                                                    td
+                                                                        span.badge.rounded-pill(class=getBadgeClass(asset.status)) #{asset.status}
+                                                                    td
+                                                                        a.btn.btn-sm.btn-outline-primary(href=`/asset-info?id=${asset._id}`) View History
+                                                                    td(style='display: flex; gap: 15px;')
+                                                                        a.btn.btn-sm.btn-outline-success(href=`/asset-info?id=${asset._id}`) View
+                                                                        a.btn.btn-sm.btn-outline-primary(href=`/edit-asset?id=${asset._id}`) Edit
+                                                                        a.btn.btn-sm.btn-outline-danger(href=`/delete-asset?id=${asset._id}`) Delete

@@ -1,0 +1,76 @@
+extends layout 
+
+block content
+    main#main
+        .container
+            section.pb-3.pb-md-4.pb-xl-5.bg-light.mt-5
+                .container
+                    .row.gy-3.gy-md-4
+                        .col-12
+                            .row.gy-3.gy-md-4
+                                .col-12
+                                    .card.widget-card.border-light.shadow-sm
+                                        .card-header.bg-transparent.p-4.border-light-subtle
+                                            h5.card-title.widget-card-title.m-0 Asset Details
+                                        .card-body.p-4
+                                            table.table.table-striped
+
+                                                tbody
+
+                                                    tr
+
+                                                        td
+                                                            p Name : #{asset.name}
+                                                    tr 
+                                                        td
+                                                            p Serial Number : #{asset.serialNumber}    
+                                                    tr                                                     
+                                                        td
+                                                            p Status : #{asset.status}
+                                                    tr
+                                                        td
+                                                            p Purchase Date : #{asset.purchaseDate}
+                                                    tr
+                                                        td
+                                                            p Warranty End Date : #{asset.warrantyEndDate}
+                                                    tr
+                                                        td
+                                                            p Description : #{asset.description}
+                                                    tr
+                                                        td
+                                                            p Location : #{asset.location}
+                                                    tr
+                                                        td
+                                                            p Category : #{asset.category}
+
+
+                    .row.gy-3.gy-md-4
+                        .col-12
+                            .row.gy-3.gy-md-4
+                                .col-12
+                                    .card.widget-card.border-light.shadow-sm
+                                        .card-header.bg-transparent.p-4.border-light-subtle
+                                            h5.card-title.widget-card-title.m-0 Used Employess
+                                        .card-body.p-4
+                                            table.table.table-striped
+                                                thead
+                                                    tr
+                                                        th(scope='col') #
+                                                        th(scope='col') Name
+                                                        th(scope='col') From Date
+                                                        th(scope='col') To Date
+                                                        th(scope='col') Returned Date
+                                                        th(scope='col') Reason
+                                                        th(scope='col') Status
+                                                tbody
+                                                each employee , index in asset.employees|| []
+                                                    tr
+                                                        th(scope='row') #{index + 1}
+                                                        td= employee.employeeName
+                                                        td=employee.from_date 
+                                                        td=employee.to_date
+                                                        td=employee.return_date
+                                                        td=employee.reason
+                                                        td=employee.employeeStatus
+
+                                                        

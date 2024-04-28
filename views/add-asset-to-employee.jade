@@ -1,0 +1,44 @@
+extends layout
+
+block content
+    .container
+        .col-12.form-container.mt-5
+            .row.gy-3.gy-md-4
+                .col-12
+                    .card.widget-card.border-light.shadow-sm
+                        .card-header.bg-transparent.p-4.border-light-subtle
+                            h5.card-title.widget-card-title.m-0 Add Employee
+                        .card-body.p-4
+                            form.row.g-3(action=`/add-asset-to-employee?id=${id}` method='POST')
+                                if id==undefined||id==null
+                                    .col-12
+                                        label.form-label(for='employee_id') Select Employee
+                                        select#employee_id.form-select(name='employee_id')
+                                            option(value='' disabled selected) Select Employee
+                                            each employee in employees || []
+                                                option(value=employee._id)= employee.name
+                                .col-12
+                                    label.form-label(for='asset_id') Select Asset
+                                    select#asset_id.form-select(name='asset_id')
+                                        option(value='' disabled selected) Select Asset
+                                        each asset in assets || []
+                                            option(value=asset._id)= asset.name + ' ' + asset.serialNumber
+                                .col-md-6
+                                    label.form-label(for='from_date') From Date
+                                    input#from_date.form-control(name='from_date' type='date' required)
+                                .col-md-6
+                                    label.form-label(for='to_date') To Date
+                                    input#to_date.form-control(name='to_date' type='date' required)
+                                .col-12
+                                    button.btn.btn-primary.btn-lg.w-100(type='submit') Add Asset To Employee
+                                if message
+                                    if message.type === 'success'
+                                        .alert.alert-success.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}
+                                    else if message.type === 'danger'
+                                        .alert.alert-danger.alert-dismissible.fade.show(role='alert')
+                                            button.close(type='button' data-bs-dismiss='alert' aria-label='Close')
+                                                span(aria-hidden='true') &times;
+                                            | #{message.text}
