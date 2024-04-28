@@ -28,7 +28,10 @@ router.get("/protected", auth, (req, res) => {
 router.get('/edit-asset',auth,controller.getEditAsset);
 router.get('/asset-info',auth,controller.getAssetInfo);
 router.get('/return-asset',auth,controller.getReturnAsset);
-
+router.get('/logout',auth,()=>{
+    res.clearCookie('token');
+    res.redirect('/login');
+});
 
 
 router.post("/login", controller.login);
